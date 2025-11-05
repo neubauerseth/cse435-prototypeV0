@@ -123,20 +123,23 @@
             top: 12px;
             left: 12px;
             right: auto;
-            background: transparent;
+            background: rgba(0,0,0,0.6);
             color: #00ff88;
             border: 1px solid rgba(255,255,255,0.08);
-            padding: 6px 8px;
-            border-radius: 6px;
+            padding: 8px 10px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            z-index: 20;
+            z-index: 9999; /* ensure toggle sits above other controls */
+            box-shadow: 0 6px 18px rgba(0,255,136,0.08);
         }
 
         /* Collapsed state for info-panel on small screens */
         #info-panel.collapsed {
             width: 56px;
             padding: 8px;
+            /* add extra top padding so the toggle has a protected area */
+            padding-top: 36px;
             overflow: visible;
         }
 
@@ -147,13 +150,13 @@
         /* Keep scenario buttons visible when collapsed */
         #info-panel .controls { margin-top: 8px; }
         #info-panel.collapsed .controls { display: flex; }
-        #info-panel.collapsed .scenario-controls { display: flex; flex-direction: column; gap: 8px; width: 48px; }
+        #info-panel.collapsed .scenario-controls { display: flex; flex-direction: column; gap: 8px; width: 48px; margin-top: 6px; }
         #info-panel.collapsed .scenario-controls button { width: 100%; padding: 6px 4px; font-size: 12px; }
         /* When collapsed, center the toggle above the small panel so it doesn't overlap buttons */
         #info-panel.collapsed #toggle-menu {
             left: 50%;
             transform: translateX(-50%);
-            top: 6px;
+            top: -12px; /* float above the panel */
         }
         /* Make room for the toggle in expanded state so it doesn't overlap the heading */
         #info-panel h1 { margin-left: 40px; }
