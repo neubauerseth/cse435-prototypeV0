@@ -120,8 +120,9 @@
         /* Info panel toggle button */
         #toggle-menu {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            left: 12px;
+            right: auto;
             background: transparent;
             color: #00ff88;
             border: 1px solid rgba(255,255,255,0.08);
@@ -129,6 +130,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
+            z-index: 20;
         }
 
         /* Collapsed state for info-panel on small screens */
@@ -147,6 +149,14 @@
         #info-panel.collapsed .controls { display: flex; }
         #info-panel.collapsed .scenario-controls { display: flex; flex-direction: column; gap: 8px; width: 48px; }
         #info-panel.collapsed .scenario-controls button { width: 100%; padding: 6px 4px; font-size: 12px; }
+        /* When collapsed, center the toggle above the small panel so it doesn't overlap buttons */
+        #info-panel.collapsed #toggle-menu {
+            left: 50%;
+            transform: translateX(-50%);
+            top: 6px;
+        }
+        /* Make room for the toggle in expanded state so it doesn't overlap the heading */
+        #info-panel h1 { margin-left: 40px; }
 
         .legend-item {
             display: flex;
