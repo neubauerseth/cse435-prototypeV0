@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+}
+
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#info-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 350px;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+#info-panel h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00ff88;
+}
+
+#info-panel p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.scenario-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+#reset-camera {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    width: 100%;
+}
+
+#reset-camera:hover {
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+button.active {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.status {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0, 255, 136, 0.1);
+    border-radius: 5px;
+    border-left: 3px solid #00ff88;
+}
+
+.status-title {
+    font-weight: bold;
+    color: #00ff88;
+    margin-bottom: 5px;
+}
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #00ff88;
+}
+
+/* Info panel toggle button */
+#toggle-menu {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: auto;
+    background: rgba(0,0,0,0.6);
+    color: #00ff88;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 9999; /* ensure toggle sits above other controls */
+    box-shadow: 0 6px 18px rgba(0,255,136,0.08);
+}
+
+/* Collapsed state for info-panel on small screens */
+#info-panel.collapsed {
+    width: 56px;
+    padding: 8px;
+    /* add extra top padding so the toggle has a protected area */
+    padding-top: 36px;
+    overflow: visible;
+}
+
+#info-panel.collapsed h1,
+#info-panel.collapsed .panel-body {
+    display: none;
+}
+/* Keep scenario buttons visible when collapsed */
+#info-panel .controls { margin-top: 8px; }
+#info-panel.collapsed .controls { display: flex; }
+#info-panel.collapsed .scenario-controls { display: flex; flex-direction: column; gap: 8px; width: 48px; margin-top: 6px; }
+#info-panel.collapsed .scenario-controls button { width: 100%; padding: 6px 4px; font-size: 12px; }
+/* When collapsed, center the toggle above the small panel so it doesn't overlap buttons */
+#info-panel.collapsed #toggle-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -12px; /* float above the panel */
+}
+/* Make room for the toggle in expanded state so it doesn't overlap the heading */
+#info-panel h1 { margin-left: 40px; }
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ff88;
+    font-size: 24px;
+    font-weight: bold;
+}
