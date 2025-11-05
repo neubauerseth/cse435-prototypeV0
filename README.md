@@ -11,4 +11,4 @@ I was tasked with recreating Scenario 1 and 2 which are:
   - The system adjusts the beam pattern when an oncoming vehicle is detected, ensuring no glare while maintaining maximum illumination on other road areas.
   - 
 
-Here is the hosted version (link) [https://cse345-prototypev0.netlify.app/adb-system-demo.html]
+Here is the hosted version [website link] (https://cse345-prototypev0.netlify.app/adb-system-demo.html)
