@@ -142,6 +142,11 @@
         #info-panel.collapsed .panel-body {
             display: none;
         }
+        /* Keep scenario buttons visible when collapsed */
+        #info-panel .controls { margin-top: 8px; }
+        #info-panel.collapsed .controls { display: flex; }
+        #info-panel.collapsed .scenario-controls { display: flex; flex-direction: column; gap: 8px; width: 48px; }
+        #info-panel.collapsed .scenario-controls button { width: 100%; padding: 6px 4px; font-size: 12px; }
 
         .legend-item {
             display: flex;
@@ -177,15 +182,14 @@
     <div id="info-panel">
         <button id="toggle-menu" type="button" aria-expanded="true" title="Toggle menu" aria-controls="info-panel-body">☰</button>
         <h1>🚗 Adaptive Driving Beam System</h1>
-        <div id="info-panel-body" class="panel-body">
-            <p>Interactive 3D demonstration of intelligent headlight control for enhanced nighttime driving safety.</p>
-            
             <div class="controls">
                 <div class="scenario-controls">
                     <button id="scenario1" class="active">Scenario 1</button>
                     <button id="scenario2">Scenario 2</button>
                 </div>
             </div>
+            <div id="info-panel-body" class="panel-body">
+                <p>Interactive 3D demonstration of intelligent headlight control for enhanced nighttime driving safety.</p>
 
             <div class="status">
                 <div class="status-title">Current Status:</div>
