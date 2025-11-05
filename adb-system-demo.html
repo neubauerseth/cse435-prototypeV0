@@ -37,7 +37,9 @@
 
     <!-- Legend (Bottom Right corner) -->
     <div class="legend">
-        <div style="font-weight: bold; margin-bottom: 10px; color: #00ff88;">Legend</div>
+        <div class="legend-header">
+            <div class="legend-title" style="font-weight: bold; color: #00ff88;">Legend</div>
+        </div>
         <div class="legend-item">
             <div class="legend-color" style="background: #00d4ff;"></div>
             <span>Your Vehicle</span>
@@ -55,6 +57,9 @@
             <span>Dimmed Area</span>
         </div>
     </div>
+
+    <!-- Floating legend toggle (outside the legend so it remains visible when legend is hidden) -->
+    <button id="legend-toggle" class="legend-floater" type="button" aria-pressed="false" title="Hide legend">Hide</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="adb-system-demo.js"></script>

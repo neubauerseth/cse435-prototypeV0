@@ -102,7 +102,8 @@ button.active {
 .legend {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    /* move slightly left to make room for the floating toggle */
+    right: 70px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 15px;
@@ -177,4 +178,34 @@ button.active {
     color: #00ff88;
     font-size: 24px;
     font-weight: bold;
+}
+
+/* Legend header and toggle */
+.legend-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#legend-toggle {
+    background: transparent;
+    color: #00ff88;
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.legend.hidden {
+    display: none;
+}
+
+/* Floating toggle placed outside the legend so it's always reachable */
+.legend-floater {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10001;
 }

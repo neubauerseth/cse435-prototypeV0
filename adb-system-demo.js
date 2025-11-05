@@ -94,6 +94,28 @@ function init() {
         if (window.innerWidth <= 700) applyPanelState(true);
     }
 
+    // Legend show/hide control (persisted)
+    (function() {
+        const legend = document.querySelector('.legend');
+        const legendToggle = document.getElementById('legend-toggle');
+        if (!legend || !legendToggle) return;
+        function applyLegendState(hidden) {
+            legend.classList.toggle('hidden', !!hidden);
+            legendToggle.textContent = hidden ? 'Show' : 'Hide';
+            legendToggle.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+            legendToggle.title = hidden ? 'Show legend' : 'Hide legend';
+        }
+        try {
+            const storedLegend = localStorage.getItem('adb_legend_hidden');
+            applyLegendState(storedLegend === '1');
+        } catch (e) {}
+        legendToggle.addEventListener('click', () => {
+            const nowHidden = !legend.classList.contains('hidden');
+            applyLegendState(nowHidden);
+            try { localStorage.setItem('adb_legend_hidden', nowHidden ? '1' : '0'); } catch (e) {}
+        });
+    })();
+
     // Handle window resize
     window.addEventListener('resize', onWindowResize, false);
 
@@ -547,7 +569,7 @@ function updateLightingForScenario(scenario) {
             }
         });
     }
-    
+
     // Scenario 1: Full high beam
     if (scenario === 1) {
         
