@@ -117,6 +117,32 @@
             border: 2px solid #00ff88;
         }
 
+        /* Info panel toggle button */
+        #toggle-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            color: #00ff88;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Collapsed state for info-panel on small screens */
+        #info-panel.collapsed {
+            width: 56px;
+            padding: 8px;
+            overflow: visible;
+        }
+
+        #info-panel.collapsed h1,
+        #info-panel.collapsed .panel-body {
+            display: none;
+        }
+
         .legend-item {
             display: flex;
             align-items: center;
@@ -149,24 +175,27 @@
     </div>
 
     <div id="info-panel">
+        <button id="toggle-menu" type="button" aria-expanded="true" title="Toggle menu" aria-controls="info-panel-body">☰</button>
         <h1>🚗 Adaptive Driving Beam System</h1>
-        <p>Interactive 3D demonstration of intelligent headlight control for enhanced nighttime driving safety.</p>
-        
-        <div class="controls">
-            <div class="scenario-controls">
-                <button id="scenario1" class="active">Scenario 1</button>
-                <button id="scenario2">Scenario 2</button>
+        <div id="info-panel-body" class="panel-body">
+            <p>Interactive 3D demonstration of intelligent headlight control for enhanced nighttime driving safety.</p>
+            
+            <div class="controls">
+                <div class="scenario-controls">
+                    <button id="scenario1" class="active">Scenario 1</button>
+                    <button id="scenario2">Scenario 2</button>
+                </div>
             </div>
-        </div>
 
-        <div class="status">
-            <div class="status-title">Current Status:</div>
-            <div id="status-text">Scenario One: The ADB system operates effectively on a straight highway at night, with no other vehicles present. Demonstrating full high-beam illumination.</div>
-        </div>
+            <div class="status">
+                <div class="status-title">Current Status:</div>
+                <div id="status-text">Scenario One: The ADB system operates effectively on a straight highway at night, with no other vehicles present. Demonstrating full high-beam illumination.</div>
+            </div>
 
-        <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">
-            <strong>Controls:</strong> Switch between scenarios using the buttons above to see adaptive beam control in action.
-        </p>
+            <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">
+                <strong>Controls:</strong> Switch between scenarios using the buttons above to see adaptive beam control in action.
+            </p>
+        </div>
     </div>
 
     <div class="legend">
@@ -246,6 +275,35 @@
             // Event listeners
             document.getElementById('scenario1').addEventListener('click', () => switchScenario(1));
             document.getElementById('scenario2').addEventListener('click', () => switchScenario(2));
+
+            // Info-panel toggle for small screens
+            const toggleBtn = document.getElementById('toggle-menu');
+            const infoPanel = document.getElementById('info-panel');
+            const infoBody = document.getElementById('info-panel-body');
+            function applyPanelState(collapsed) {
+                if (collapsed) {
+                    infoPanel.classList.add('collapsed');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    infoPanel.classList.remove('collapsed');
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                }
+            }
+            toggleBtn.addEventListener('click', () => {
+                const isCollapsed = infoPanel.classList.toggle('collapsed');
+                toggleBtn.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+                try { localStorage.setItem('adb_menu_collapsed', isCollapsed ? '1' : '0'); } catch (e) {}
+            });
+
+            // Initialize panel state from localStorage or auto-collapse on narrow screens
+            try {
+                const stored = localStorage.getItem('adb_menu_collapsed');
+                if (stored === '1') applyPanelState(true);
+                else if (stored === '0') applyPanelState(false);
+                else if (window.innerWidth <= 700) applyPanelState(true);
+            } catch (e) {
+                if (window.innerWidth <= 700) applyPanelState(true);
+            }
 
             // Handle window resize
             window.addEventListener('resize', onWindowResize, false);
