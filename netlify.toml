@@ -1,0 +1,9 @@
+[build]
+  # No build command for this static demo
+  command = ""
+  # Publish root (repo root)
+  publish = "."
+
+[dev]
+  # Local dev server port (optional)
+  port = 8888
